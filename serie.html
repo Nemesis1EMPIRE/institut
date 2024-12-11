@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="fr">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -44,12 +45,14 @@
             color: #333;
         }
 
-        .season-selector, .episode-list {
+        .season-selector,
+        .episode-list {
             margin: 20px auto;
             max-width: 800px;
         }
 
-        .season-selector select, .episode-list ul {
+        .season-selector select,
+        .episode-list ul {
             width: 100%;
             padding: 10px;
             font-size: 16px;
@@ -78,28 +81,28 @@
         }
     </style>
 </head>
+
 <body>
     <header>
-        <h1>Série 1</h1>
+        <h1>Kongossa</h1>
     </header>
+
     <section class="series-details">
-        <img src="https://via.placeholder.com/300x450" alt="Série 1">
+        <img src="assets/kongossa.jpeg" alt="Série 1">
     </section>
 
     <section class="series-info">
-        <h1>Série 1</h1>
-        <p>Durée moyenne : 50min</p>
-        <p>Genres : Drame, Action</p>
-        <p>Nombre de saisons : 3</p>
-        <p>Description : Une série palpitante qui explore les défis d'un héros moderne.</p>
+        <h1>Kongossa</h1>
+        <p>Durée moyenne : 20min</p>
+        <p>Genres : Drame, Comédie</p>
+        <p>Nombre de saisons : 2</p>
+        <p>Description : Série gabonaise.</p>
     </section>
 
     <section class="season-selector">
         <h2>Sélectionnez une saison :</h2>
         <select id="seasonDropdown">
-            <option value="1">Saison 1</option>
             <option value="2">Saison 2</option>
-            <option value="3">Saison 3</option>
         </select>
     </section>
 
@@ -110,9 +113,7 @@
 
     <script>
         const episodesData = {
-            1: ["Épisode 1: Le début", "Épisode 2: La rencontre", "Épisode 3: Le conflit", "Épisode 4: La résolution"],
-            2: ["Épisode 1: Nouvelle aventure", "Épisode 2: En terrain inconnu", "Épisode 3: Alliances", "Épisode 4: Fin de saison"],
-            3: ["Épisode 1: Retour", "Épisode 2: La revanche", "Épisode 3: Dévoilement", "Épisode 4: La conclusion"]
+            1: ["S2 épisode 1", "S2 épisode 2", ],
         };
 
         const seasonDropdown = document.getElementById('seasonDropdown');
@@ -120,13 +121,20 @@
 
         function updateEpisodes(season) {
             episodeList.innerHTML = "";
+
             episodesData[season].forEach((episode, index) => {
                 const li = document.createElement('li');
                 li.textContent = episode;
+
+                // Change the `onclick` action to redirect to the specific episode page
                 li.onclick = () => {
-                    const episodeId = `${season}-${index + 1}`;
-                    window.location.href = `lecteur.html?episode=${episodeId}`;
+                    if (index === 0) {
+                        window.location.href = 'lecteur2.html'; // Episode 1 goes to lecteur2.html
+                    } else if (index === 1) {
+                        window.location.href = 'lecteur.html'; // Episode 2 goes to lecteur.html
+                    }
                 };
+
                 episodeList.appendChild(li);
             });
         }
@@ -138,5 +146,7 @@
         // Initial load
         updateEpisodes(1);
     </script>
+
 </body>
+
 </html>
