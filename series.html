@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Séries</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f8f9fa;
+            margin: 0;
+            padding: 0;
+        }
+
+
+        .doc-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+            margin: 20px;
+        }
+
+        .doc-card {
+            background-color: #fff;
+            border-radius: 8px;
+            margin: 15px;
+            width: 250px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+
+        .doc-card img {
+            width: 100%;
+            height: auto;
+            border-bottom: 2px solid #ddd;
+            cursor: pointer;
+        }
+
+        .doc-card .doc-title {
+            font-size: 18px;
+            font-weight: bold;
+            padding: 10px;
+            text-align: center;
+            color: black;
+        }
+
+        .doc-card .doc-button {
+            background-color: #0073e6;
+            color: white;
+            padding: 10px;
+            text-align: center;
+            text-decoration: none;
+            display: block;
+            font-size: 16px;
+            border-radius: 5px;
+            margin-bottom: 10px;
+            cursor: pointer;
+        }
+
+        .doc-card .doc-button:hover {
+            background-color: #005bb5;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>IMES</h1>
+        <p>Regardez vos films, séries et documentaires préférés.</p>
+    </header>
+    
+    <nav>
+        <ul class="nav-links">
+            <li><a href="index.html" class="active">Accueil</a></li>
+            <li><a href="films.html">Films</a></li>
+            <li><a href="series.html">Séries</a></li>
+            <li><a href="documentaires.html">Documentaires</a></li>
+            <li><a href="livres.html">Livres</a></li>
+        </ul>
+    </nav>
+    
+
+    <div class="doc-container">
+        <!-- Série 1 -->
+        <div class="doc-card">
+            <img src="https://via.placeholder.com/250x150" alt="Série 1" onclick="window.location.href='serie.html?doc=1'">
+            <div class="doc-title">Série 1: Titre</div>
+        </div>
+
+        <!-- Série 2 -->
+        <div class="doc-card">
+            <img src="https://via.placeholder.com/250x150" alt="Série 2" onclick="window.location.href='serie.html?doc=2'">
+            <div class="doc-title">Série 2: Titre</div>
+        </div>
+
+        <!-- Série 3 -->
+        <div class="doc-card">
+            <img src="https://via.placeholder.com/250x150" alt="Série 3" onclick="window.location.href='serie.html?doc=3'">
+            <div class="doc-title">Série 3: Titre</div>
+        </div>
+
+        <!-- Série 4 -->
+        <div class="doc-card">
+            <img src="https://via.placeholder.com/250x150" alt="Série 4" onclick="window.location.href='serie.html?doc=4'">
+            <div class="doc-title">Série 4: Titre</div>
+        </div>
+
+        <!-- Série 5 -->
+        <div class="doc-card">
+            <img src="https://via.placeholder.com/250x150" alt="Série 5" onclick="window.location.href='serie.html?doc=5'">
+            <div class="doc-title">Série 5: Titre</div>
+        </div>
+        
+        <!-- Série 6 -->
+        <div class="doc-card">
+            <img src="https://via.placeholder.com/250x150" alt="Série 6" onclick="window.location.href='serie.html?doc=6'">
+            <div class="doc-title">Série 6: Titre</div>
+        </div>
+        
+        <!-- Série 7 -->
+        <div class="doc-card">
+            <img src="https://via.placeholder.com/250x150" alt="Série 7" onclick="window.location.href='serie.html?doc=7'">
+            <div class="doc-title">Série 7: Titre</div>
+        </div>
+        
+        <!-- Série 8 -->
+        <div class="doc-card">
+            <img src="https://via.placeholder.com/250x150" alt="Série 8" onclick="window.location.href='serie.html?doc=8'">
+            <div class="doc-title">Série 8: Titre</div>
+        </div>
+        
+        <!-- Série 9 -->
+        <div class="doc-card">
+            <img src="https://via.placeholder.com/250x150" alt="Série 9" onclick="window.location.href='serie.html?doc=9'">
+            <div class="doc-title">Série 9: Titre</div>
+        </div>
+
+        <!-- Série 10 -->
+        <div class="doc-card">
+            <img src="https://via.placeholder.com/250x150" alt="Série 10" onclick="window.location.href='serie.html?doc=10'">
+            <div class="doc-title">Série 10: Titre</div>
+        </div>
+    </div>
+
+</body>
+</html>

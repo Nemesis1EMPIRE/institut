@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lecteur Vidéo</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f8f9fa;
+            color: #333;
+        }
+
+        header {
+            background-color: #0073e6;
+            color: white;
+            padding: 10px 20px;
+            text-align: center;
+            font-size: 24px;
+        }
+
+        .video-container {
+            margin: 20px auto;
+            text-align: center;
+            max-width: 900px;
+        }
+
+        video {
+            width: 100%;
+            height: auto;
+            max-width: 800px;
+            border-radius: 8px;
+        }
+
+        .episode-info {
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        .navigation-buttons {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .nav-button {
+            background-color: #0073e6;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 5px;
+            text-align: center;
+            font-size: 16px;
+            cursor: pointer;
+            width: 45%;
+        }
+
+        .nav-button:hover {
+            background-color: #005bb5;
+        }
+
+        .back-button {
+            display: inline-block;
+            background-color: #0073e6;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 5px;
+            text-align: center;
+            font-size: 16px;
+            cursor: pointer;
+            margin-top: 20px;
+            text-decoration: none;
+        }
+
+        .back-button:hover {
+            background-color: #005bb5;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Lecteur Vidéo</h1>
+    </header>
+    
+    <section class="video-container">
+        <video controls id="videoPlayer">
+            <source src="" type="video/mp4" id="videoSource">
+            Votre navigateur ne prend pas en charge la lecture vidéo.
+        </video>
+    </section>
+
+    <section class="episode-info">
+        <p id="episodeTitle">Épisode non sélectionné</p>
+    </section>
+
+    <section class="navigation-buttons">
+        <button id="prevButton" class="nav-button">Précédent</button>
+        <button id="nextButton" class="nav-button">Suivant</button>
+    </section>
+
+    <a href="series.html" class="back-button">Retour à la série</a>
+
+    <script>
+        const urlParams = new URLSearchParams(window.location.search);
+        const episodeId = urlParams.get('episode');
+        const episodeTitle = document.getElementById('episodeTitle');
+        const videoSource = document.getElementById('videoSource');
+
+        // Données des épisodes
+        const episodes = {
+            "1-1": { title: "Épisode 1: Le début", videoUrl: "https://via.placeholder.com/800x400.mp4" },
+            "1-2": { title: "Épisode 2: La rencontre", videoUrl: "https://via.placeholder.com/800x400.mp4" },
+            "1-3": { title: "Épisode 3: Le conflit", videoUrl: "https://via.placeholder.com/800x400.mp4" },
+            "1-4": { title: "Épisode 4: La résolution", videoUrl: "https://via.placeholder.com/800x400.mp4" },
+            "2-1": { title: "Épisode 1: Nouvelle aventure", videoUrl: "https://via.placeholder.com/800x400.mp4" },
+            "2-2": { title: "Épisode 2: En terrain inconnu", videoUrl: "https://via.placeholder.com/800x400.mp4" },
+            "2-3": { title: "Épisode 3: Alliances", videoUrl: "https://via.placeholder.com/800x400.mp4" },
+            "2-4": { title: "Épisode 4: Fin de saison", videoUrl: "https://via.placeholder.com/800x400.mp4" },
+            "3-1": { title: "Épisode 1: Retour", videoUrl: "https://via.placeholder.com/800x400.mp4" },
+            "3-2": { title: "Épisode 2: La revanche", videoUrl: "https://via.placeholder.com/800x400.mp4" },
+            "3-3": { title: "Épisode 3: Dévoilement", videoUrl: "https://via.placeholder.com/800x400.mp4" },
+            "3-4": { title: "Épisode 4: La conclusion", videoUrl: "https://via.placeholder.com/800x400.mp4" }
+        };
+
+        // Fonction pour changer l'épisode
+        function changeEpisode(episodeId) {
+            if (episodes[episodeId]) {
+                episodeTitle.textContent = episodes[episodeId].title;
+                videoSource.src = episodes[episodeId].videoUrl;
+            } else {
+                episodeTitle.textContent = "Épisode non disponible";
+            }
+        }
+
+        // Récupérer les indices de l'épisode actuel
+        const [season, episode] = episodeId.split('-').map(num => parseInt(num, 10));
+        const currentEpisodeIndex = (season - 1) * 4 + (episode - 1);  // Index dans la liste des épisodes
+
+        // Boutons de navigation
+        const prevButton = document.getElementById('prevButton');
+        const nextButton = document.getElementById('nextButton');
+
+        // Gérer les boutons Précédent et Suivant
+        prevButton.addEventListener('click', () => {
+            if (currentEpisodeIndex > 0) {
+                const prevEpisodeId = Object.keys(episodes)[currentEpisodeIndex - 1];
+                window.location.href = `lecteur.html?episode=${prevEpisodeId}`;
+            }
+        });
+
+        nextButton.addEventListener('click', () => {
+            if (currentEpisodeIndex < Object.keys(episodes).length - 1) {
+                const nextEpisodeId = Object.keys(episodes)[currentEpisodeIndex + 1];
+                window.location.href = `lecteur.html?episode=${nextEpisodeId}`;
+            }
+        });
+
+        // Initialisation de l'épisode
+        changeEpisode(episodeId);
+    </script>
+</body>
+</html>

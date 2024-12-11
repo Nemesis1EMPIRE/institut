@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Série 1</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f8f9fa;
+            color: #333;
+        }
+
+        header {
+            background-color: #0073e6;
+            color: white;
+            padding: 10px 20px;
+            text-align: center;
+            font-size: 24px;
+        }
+
+        .series-details {
+            margin: 20px;
+            text-align: center;
+        }
+
+        .series-details img {
+            width: 300px;
+            height: auto;
+            border-radius: 8px;
+        }
+
+        .series-info {
+            margin: 20px auto;
+            text-align: left;
+            max-width: 800px;
+            background: #ffffff;
+            border-radius: 10px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+            padding: 20px;
+            color: #333;
+        }
+
+        .season-selector, .episode-list {
+            margin: 20px auto;
+            max-width: 800px;
+        }
+
+        .season-selector select, .episode-list ul {
+            width: 100%;
+            padding: 10px;
+            font-size: 16px;
+            margin-bottom: 10px;
+            border-radius: 5px;
+            border: 1px solid #ddd;
+        }
+
+        .episode-list ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .episode-list li {
+            padding: 10px;
+            margin: 5px 0;
+            background: #ffffff;
+            border-radius: 5px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+            cursor: pointer;
+        }
+
+        .episode-list li:hover {
+            background: #0073e6;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Série 1</h1>
+    </header>
+    <section class="series-details">
+        <img src="https://via.placeholder.com/300x450" alt="Série 1">
+    </section>
+
+    <section class="series-info">
+        <h1>Série 1</h1>
+        <p>Durée moyenne : 50min</p>
+        <p>Genres : Drame, Action</p>
+        <p>Nombre de saisons : 3</p>
+        <p>Description : Une série palpitante qui explore les défis d'un héros moderne.</p>
+    </section>
+
+    <section class="season-selector">
+        <h2>Sélectionnez une saison :</h2>
+        <select id="seasonDropdown">
+            <option value="1">Saison 1</option>
+            <option value="2">Saison 2</option>
+            <option value="3">Saison 3</option>
+        </select>
+    </section>
+
+    <section class="episode-list">
+        <h2>Épisodes :</h2>
+        <ul id="episodeList"></ul>
+    </section>
+
+    <script>
+        const episodesData = {
+            1: ["Épisode 1: Le début", "Épisode 2: La rencontre", "Épisode 3: Le conflit", "Épisode 4: La résolution"],
+            2: ["Épisode 1: Nouvelle aventure", "Épisode 2: En terrain inconnu", "Épisode 3: Alliances", "Épisode 4: Fin de saison"],
+            3: ["Épisode 1: Retour", "Épisode 2: La revanche", "Épisode 3: Dévoilement", "Épisode 4: La conclusion"]
+        };
+
+        const seasonDropdown = document.getElementById('seasonDropdown');
+        const episodeList = document.getElementById('episodeList');
+
+        function updateEpisodes(season) {
+            episodeList.innerHTML = "";
+            episodesData[season].forEach((episode, index) => {
+                const li = document.createElement('li');
+                li.textContent = episode;
+                li.onclick = () => {
+                    const episodeId = `${season}-${index + 1}`;
+                    window.location.href = `lecteur.html?episode=${episodeId}`;
+                };
+                episodeList.appendChild(li);
+            });
+        }
+
+        seasonDropdown.addEventListener('change', (e) => {
+            updateEpisodes(e.target.value);
+        });
+
+        // Initial load
+        updateEpisodes(1);
+    </script>
+</body>
+</html>

@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lecteur Documentaire</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f8f9fa;
+            margin: 0;
+            padding: 0;
+        }
+
+        header {
+            background-color: #0073e6;
+            color: white;
+            padding: 10px 20px;
+            text-align: center;
+            font-size: 24px;
+        }
+
+        .video-container {
+            margin: 20px auto;
+            text-align: center;
+            max-width: 900px;
+        }
+
+        video {
+            width: 100%;
+            height: auto;
+            max-width: 800px;
+            border-radius: 8px;
+        }
+
+        .doc-details {
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        .back-button {
+            display: inline-block;
+            background-color: #0073e6;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 5px;
+            text-align: center;
+            font-size: 16px;
+            cursor: pointer;
+            margin-top: 20px;
+            text-decoration: none;
+        }
+
+        .back-button:hover {
+            background-color: #005bb5;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Lecteur Documentaire</h1>
+    </header>
+    
+    <section class="video-container">
+        <video controls id="videoPlayer">
+            <source src="" type="video/mp4" id="videoSource">
+            Votre navigateur ne prend pas en charge la lecture vidéo.
+        </video>
+    </section>
+
+    <section class="doc-details">
+        <p id="docTitle">Documentaire non sélectionné</p>
+        <p id="docDescription">Description du documentaire ici.</p>
+    </section>
+
+    <a href="documentaires.html" class="back-button">Retour à la liste des documentaires</a>
+
+    <script>
+        const urlParams = new URLSearchParams(window.location.search);
+        const docId = urlParams.get('doc');
+        const docTitle = document.getElementById('docTitle');
+        const docDescription = document.getElementById('docDescription');
+        const videoSource = document.getElementById('videoSource');
+
+        // Données des documentaires
+        const documentaries = {
+            1: { title: "Documentaire 1: Titre", description: "Description du Documentaire 1", videoUrl: "https://via.placeholder.com/800x400.mp4" },
+            2: { title: "Documentaire 2: Titre", description: "Description du Documentaire 2", videoUrl: "https://via.placeholder.com/800x400.mp4" },
+            3: { title: "Documentaire 3: Titre", description: "Description du Documentaire 3", videoUrl: "https://via.placeholder.com/800x400.mp4" },
+            // Ajoutez plus de documentaires ici...
+        };
+
+        const documentary = documentaries[docId];
+        if (documentary) {
+            docTitle.textContent = documentary.title;
+            docDescription.textContent = documentary.description;
+            videoSource.src = documentary.videoUrl;
+            document.getElementById('videoPlayer').load();
+        } else {
+            docTitle.textContent = "Documentaire non trouvé";
+            docDescription.textContent = "Le documentaire sélectionné n'est pas disponible.";
+        }
+    </script>
+</body>
+</html>

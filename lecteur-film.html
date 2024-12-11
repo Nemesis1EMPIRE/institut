@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lecteur Film</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f8f9fa;
+            margin: 0;
+            padding: 0;
+        }
+
+        header {
+            background-color: #0073e6;
+            color: white;
+            padding: 10px 20px;
+            text-align: center;
+            font-size: 24px;
+        }
+
+        .video-container {
+            margin: 20px auto;
+            text-align: center;
+            max-width: 900px;
+        }
+
+        video {
+            width: 100%;
+            height: auto;
+            max-width: 800px;
+            border-radius: 8px;
+        }
+
+        .movie-details {
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        .back-button {
+            display: inline-block;
+            background-color: #0073e6;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 5px;
+            text-align: center;
+            font-size: 16px;
+            cursor: pointer;
+            margin-top: 20px;
+            text-decoration: none;
+        }
+
+        .back-button:hover {
+            background-color: #005bb5;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Lecteur Film</h1>
+    </header>
+    
+    <section class="video-container">
+        <video controls id="videoPlayer">
+            <source src="" type="video/mp4" id="videoSource">
+            Votre navigateur ne prend pas en charge la lecture vidéo.
+        </video>
+    </section>
+
+    <section class="movie-details">
+        <p id="movieTitle">Film non sélectionné</p>
+        <p id="movieDescription">Description du film ici.</p>
+    </section>
+
+    <a href="films.html" class="back-button">Retour à la liste des films</a>
+
+    <script>
+        const urlParams = new URLSearchParams(window.location.search);
+        const filmId = urlParams.get('film');
+        const movieTitle = document.getElementById('movieTitle');
+        const movieDescription = document.getElementById('movieDescription');
+        const videoSource = document.getElementById('videoSource');
+
+        // Données des films
+        const films = {
+            1: { title: "Film 1: Titre", description: "Description du Film 1", videoUrl: "https://via.placeholder.com/800x400.mp4" },
+            2: { title: "Film 2: Titre", description: "Description du Film 2", videoUrl: "https://via.placeholder.com/800x400.mp4" },
+            3: { title: "Film 3: Titre", description: "Description du Film 3", videoUrl: "https://via.placeholder.com/800x400.mp4" },
+            4: { title: "Film 4: Titre", description: "Description du Film 4", videoUrl: "https://via.placeholder.com/800x400.mp4" },
+            5: { title: "Film 5: Titre", description: "Description du Film 5", videoUrl: "https://via.placeholder.com/800x400.mp4" },
+            6: { title: "Film 6: Titre", description: "Description du Film 6", videoUrl: "https://via.placeholder.com/800x400.mp4" },
+            7: { title: "Film 7: Titre", description: "Description du Film 7", videoUrl: "https://via.placeholder.com/800x400.mp4" },
+            8: { title: "Film 8: Titre", description: "Description du Film 8", videoUrl: "https://via.placeholder.com/800x400.mp4" },
+            9: { title: "Film 9: Titre", description: "Description du Film 9", videoUrl: "https://via.placeholder.com/800x400.mp4" },
+            10: { title: "Film 10: Titre", description: "Description du Film 10", videoUrl: "https://via.placeholder.com/800x400.mp4" },
+        };
+
+        const film = films[filmId];
+        if (film) {
+            movieTitle.textContent = film.title;
+            movieDescription.textContent = film.description;
+            videoSource.src = film.videoUrl;
+            document.getElementById('videoPlayer').load();
+        } else {
+            movieTitle.textContent = "Film non trouvé";
+            movieDescription.textContent = "Le film sélectionné n'est pas disponible.";
+        }
+    </script>
+</body>
+</html>
