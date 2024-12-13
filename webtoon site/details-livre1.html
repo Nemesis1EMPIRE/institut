@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Webtoon Boma</title>
+    <link rel="stylesheet" href="styles.css">    
+    <style>
+        .chapter-viewer {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 15px; /* Espace entre les images */
+            padding: 20px; /* Espacement autour des images */
+        }
+        .chapter-viewer img { /* Ajuste la hauteur max des images */
+            border: 2px solid #ccc; /* Bordure autour des images */
+            border-radius: 5px; /* Coins arrondis */
+        }
+    </style>
+    
+</head>
+<body>
+    <header>
+        <nav>
+            <ul class="nav-links">
+                <li><a href="index.html" class="active">Accueil</a></li>
+                <li><a href="#">Nouveautés</a></li>
+                <li><a href="#">Nous contacter</a></li>
+            </ul>
+        </nav>
+    </header>
+    <div class="chapter-controls">
+        <button class="prev-chapter" onclick="prevChapter()">Précédent</button>
+        <select id="chapter-select" onchange="goToChapter()">
+            <option value="1">Chapitre 1</option>
+            <option value="2">Chapitre 2</option>
+            <option value="3">Chapitre 3</option>
+            <option value="4">Chapitre 4</option>
+            <!-- Ajoutez les autres chapitres -->
+        </select>
+        <button class="next-chapter" onclick="nextChapter()">Suivant</button>
+    </div>
+</div>
+    <div class="book-detail">
+        <h3 id="chapter-title">Chapitre 1</h3>
+        <div class="chapter-viewer" id="chapter-viewer">
+            <!-- Les images du chapitre s'afficheront ici -->
+        </div>
+
+        <div class="chapter-controls">
+            <button class="prev-chapter" onclick="prevChapter()">Précédent</button>
+            <select id="chapter-select" onchange="goToChapter()">
+                <option value="1">Chapitre 1</option>
+                <option value="2">Chapitre 2</option>
+                <option value="3">Chapitre 3</option>
+                <option value="4">Chapitre 4</option>
+                <!-- Ajoutez les autres chapitres -->
+            </select>
+            <button class="next-chapter" onclick="nextChapter()">Suivant</button>
+        </div>
+    </div>
+
+    <script>
+        let currentChapter = 1;
+
+        // Fonction pour vérifier si une image existe
+        function imageExists(url) {
+            const http = new XMLHttpRequest();
+            http.open('HEAD', url, false);
+            http.send();
+            return http.status === 200;
+        }
+
+        // Fonction pour charger les images d'un chapitre
+        function loadChapter(chapter) {
+            const chapterViewer = document.getElementById('chapter-viewer');
+            const chapterTitle = document.getElementById('chapter-title');
+            
+            // Effacer les images existantes
+            chapterViewer.innerHTML = '';
+
+            // Mettre à jour le titre du chapitre
+            chapterTitle.textContent = `Chapitre ${chapter}`;
+
+            // Chemin de la première image pour vérifier si le chapitre existe
+            const firstImagePath = `assets/chapter${chapter}/image1.jpeg`;
+
+            if (imageExists(firstImagePath)) {
+                // Ajouter les nouvelles images (supposons un maximum de 5 images par chapitre)
+                for (let i = 1; i <= 5; i++) {
+                    const imgPath = `assets/chapter${chapter}/image${i}.jpeg`;
+                    if (imageExists(imgPath)) {
+                        const img = document.createElement('img');
+                        img.src = imgPath;
+                        img.alt = `Chapitre ${chapter} - Image ${i}`;
+                        chapterViewer.appendChild(img);
+                    }
+                }
+            } else {
+                // Si le dossier du chapitre n'existe pas
+                chapterViewer.textContent = "Aucun chapitre disponible.";
+            }
+
+            // Mettre à jour la sélection dans le menu déroulant
+            document.getElementById('chapter-select').value = chapter;
+        }
+
+        // Charger le chapitre précédent
+        function prevChapter() {
+            if (currentChapter > 1) {
+                currentChapter--;
+                loadChapter(currentChapter);
+            }
+        }
+
+        // Charger le chapitre suivant
+        function nextChapter() {
+            const nextChapterPath = `assets/chapter${currentChapter + 1}/image1.jpeg`;
+
+            if (imageExists(nextChapterPath)) {
+                currentChapter++;
+                loadChapter(currentChapter);
+            } else {
+                alert("Aucun chapitre suivant disponible.");
+            }
+        }
+
+        // Aller au chapitre sélectionné
+        function goToChapter() {
+            currentChapter = parseInt(document.getElementById('chapter-select').value);
+            loadChapter(currentChapter);
+        }
+
+        // Charger le chapitre initial au démarrage
+        loadChapter(currentChapter);
+    </script>
+</body>
+</html>
